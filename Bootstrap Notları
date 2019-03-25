@@ -1,0 +1,734 @@
+İçindekiler
+-----------------------------------------------
+1- Kurulum 
+2- Projeye Dahil Etme
+3- Şablon İnceleme
+4- Grid Sistemi
+5- Grid Sistemine Kapsamlı Örnek
+6- Container-Fluid Sınıfı 
+7- Satırlar İçin Dikey Hizalama Yöntemleri
+8- Sütunlar İçin Yatay Hizalama Yöntemleri
+9- Sıralama Sınıfları
+10- Offset Sınıfı
+11- İç İçe Satır-Sütun Kullanımı
+12- Metin Hizalama Yöntemleri
+13- Kenarlık Stilleri
+14- Margin ve Padding Kullanımı
+15- Display Sınıfları
+16- Görünürlük 
+17- Arka Plana Renk Katmak 
+18- Metin Renk Vermek 
+19- Float ve Clearfix Özellikleri
+20- Resimler 
+21- Tablolar
+22- Butonlar
+23- Formlar
+24- Navigasyon 
+
+
+
+Bootstrap grid özellikleri ile Responsive Web Site yapımında aktif rol oynayan bir yapıdır .
+
+
+
+
+1- Kurulum 
+------------------------------------------------
+
+* Bootstrapın derlenmiş dosyalarını ve JavaScript aktivitelerini kullanmak için üç indirme yapmalıyız
+
+* ilk olarak buradan bootstrap dosyalarını 
+https://getbootstrap.com/docs/4.0/getting-started/download/
+
+* Daha sonra  buradan JQuery dosyasını kaydedelim
+https://code.jquery.com/jquery-3.3.1.min.js
+
+* Son olarak da popper dosyası indirelim 
+https://unpkg.com/popper.js@1.14.7/dist/umd/popper.min.js
+
+
+
+
+
+2- Projeye Dahil Etme
+------------------------------------------------
+
+* Bir bootstap dosyası ve içine index.html dosyası açalım . İndex dosyası içine html default taglarini yerleştirelim
+
+* Css ve Js kullanmak için ayrı ayrı iki dosya açalım 
+
+* Şimdi indirdiğimiz bootsrap dosyası içindeki css i açıp bootstrap.min.css dosyasını kendi bootstrap dosyamızdaki css dosyası içine atalım
+
+* Aynı işlemi bootstrap.min.js için de yapalım
+
+* Son olarak indirdiğimiz popper ve jquery dosyalarını da js klasörümüzün içine atalım
+
+* En son html dosyamız içine jquery en üstte olacak şekilde script tagleri arasına yerleştirelim.
+
+
+
+
+
+3- Şablon İnceleme
+------------------------------------------------
+
+* Html tagi içerisinde istersek lang= "tr" diyerek default dili değiştirebiliriz.
+
+* Aynı zamanda head , meta tagi içinde charset="utf-8" ile evrensel dil desteği alabiliriz. 
+Böylece Türkçeye özgü karakterler farklı bir görünüme bürünmezler.
+
+* Bir başka meta içinde name="viewport" content="width=device-width , initial-scale=1 , shrink-to-fit=no" alanlarını belirterek farklı platformalardaki görünümlere yardımcı oluruz.
+
+* Web sayfasındaki kodlamalar yukarıdan aşağı doğru okunur . Bu yüzdden örnek olarak bootstrabın css dosyasından farklı bir css dosyası oluşturacak olursak eğer , bu dosyanın bootstrabınkinden aşağıd olmasına özen göstermeliyiz. 
+
+
+
+
+
+4- Grid Sistemi
+------------------------------------------------
+
+* Grid sisteminde satırlar sütunlardan oluşur .
+
+* Kullanacağımız içerik bu sütunların içerisinde bulunmalıdır .
+
+* Yapı olarak olması gereken sisteme bakacak olursak 
+
+	<div class="container">	
+		<div class="row">
+			<div class="col"> ... </div>
+			<div class="col"> ... </div>
+			<div class="col"> ... </div>
+		</div>
+	</div>
+
+Böylece satırlar sütunları , container ise satırları kaplamış olur.
+
+* Web sayfasında container sınıflı bir alan oluşturduğumuzda bu alan soldan ve sağdan 15px boşluk bırakarak bu alana yerleşmektedir .
+
+* Bu container içine satırları yerleştiririz.
+
+* Bu satırların içine sütunları yerleştirdiğimizde harici bir boşluklandırma yapılmamışsa sütunlar aralarında boşluk olmadan bir bütün gibi yerleşir.
+
+* Bootstrapta her satır 12 kolona bölünmektedir 
+
+* Her satıra maximum 12 sütun sığdırılır.
+
+* Bu kolonları 12 sütun, 6-6 sütun, 4*3 , 3*4 , 2'ye 10 gibi değişik varyasyonlarda kullanabiliriz.
+
+* Satırın içine 3 tane eşit kolon gömmek için satırı 4 eşit parçaya bölen col-4 sınıfını kullanırız.
+
+	<div class="col-4"> ... </div>
+	
+* Bir küçük bir büyük kolon oluşturmak için 
+
+	<div class="col-3"> ... </div>
+	<div class="col-9"> ... </div>
+
+* Yada tek bir kolonun tamamını kapsaması için 
+
+	<div class="col-12"> ... </div>
+
+düzeni kullanabiliriz.
+
+* Bootstrap sayfa yapısında 5 tane kırılma noktası bulunur
+	
+	- Extra Small  <576px         col-
+	- Small		>=576px       col-sm-	
+	- Medium	>=768px       col-md-	
+	- Large		>=992px       col-lg-
+	- Extra Large  >=1200px    col-xl-
+
+
+
+
+5- Grid Sistemine Kapsamlı Örnek
+------------------------------------------------
+
+* Basit , 4 tane başlık ve yazısından oluşan bir html sayfası oluşturalım.
+
+* Bu sayfayı tüm genişliklere uygun tam responsive özelliğine bürüyelim.
+
+* Burada mantık şudur ki bizim satırlarımız içindeki sütunların sınıflarına 5 kırılma noktasının her biri için nasıl görüneceklerini belirtmemiz gerekiyor.
+
+* Yani mediumda 2şer largeda 1er sütun görünsün demeliyiz. Bunu tüm kırılma noktalarına uygulayalım .
+
+	<body style="text-align : center;">
+		<h1> Kırılma Noktalarının İncelenmesi </h1>
+		<hr>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-12   col-md-6   col-lg-3" >
+					<h3> Furkan Yıldız </h3>
+					<p> 22 Yaşındayım . Üniversite Son Sınıf Öğrensiyim . Bilgisayar Mühendisliği okuyorum . Web tasarımı , Backend - Frontend geliştiriciliği , Android Mobil Uygulama geliştirme , Robotik gibi birçok alanla ilgilendim . 
+					</p>
+				</div>
+
+				<div class="col-12   col-md-6   col-lg-3" >
+					<h3> Furkan Yıldız </h3>
+					<p> 22 Yaşındayım . Üniversite Son Sınıf Öğrensiyim . Bilgisayar Mühendisliği okuyorum . Web tasarımı , Backend - Frontend geliştiriciliği , Android Mobil Uygulama geliştirme , Robotik gibi birçok alanla ilgilendim . 
+					</p>
+				</div>
+
+				<div class="col-12   col-md-6   col-lg-3" >
+					<h3> Furkan Yıldız </h3>
+					<p> 22 Yaşındayım . Üniversite Son Sınıf Öğrensiyim . Bilgisayar Mühendisliği okuyorum . Web tasarımı , Backend - Frontend geliştiriciliği , Android Mobil Uygulama geliştirme , Robotik gibi birçok alanla ilgilendim . 
+					</p>
+				</div>
+
+				<div class="col-12   col-md-6   col-lg-3" >
+					<h3> Furkan Yıldız </h3>
+					<p> 22 Yaşındayım . Üniversite Son Sınıf Öğrensiyim . Bilgisayar Mühendisliği okuyorum . Web tasarımı , Backend - Frontend geliştiriciliği , Android Mobil Uygulama geliştirme , Robotik gibi birçok alanla ilgilendim . 
+					</p>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+
+
+
+6- Container-Fluid Sınıfı 
+------------------------------------------------
+
+* Bu sınıfımızın container sınıfından farkı sahip olduğu genişliktir.
+
+* Container sınıfının özelliği kenarlarda bırakılan boşluktur.
+
+* Tüm kırılma noktalarında genişlik olarak tam değildir. 
+
+* Belli bir piksel boyutunda boşluk bırakılır.
+
+* Ancak fuild özelliği olanda genişlik her zaman %100 dür.
+
+
+
+
+7- Satırlar İçin Dikey Hizalama Yöntemleri
+------------------------------------------------
+
+* Satırı Üste Hizalama İçin 
+
+	<div class="row align-items-start"></div>
+	
+* Satırı Ortaya Hizalama İçin 
+
+	<div class="row align-items-center"></div>
+
+* Satırı Alta Hizalama İçin 
+
+	<div class="row align-items-end"></div>
+
+* Kolonlardaki sütunları tek tek hizalamak için
+
+	<div class="row">
+		<div class="col align-self-start">sütun</div>
+		<div class="col align-self-center">sütun</div>
+		<div class="col align-self-end">sütun</div>
+	</div>
+
+
+
+
+
+8- Sütunlar İçin Yatay Hizalama Yöntemleri
+------------------------------------------------
+
+* Kolonları komple başa hizalamak için 
+
+	<div class="row justify-content-start">
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+	</div>
+
+* Kolonları komple ortaya hizalamak için 
+
+	<div class="row justify-content-center">
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+	</div>
+
+
+* Kolonları komple sona hizalamak için 
+
+	<div class="row justify-content-end">
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+	</div>
+
+
+* Kolonları satırlara eşit dağıtmak için 
+
+	<div class="row justify-content-around">
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+	</div>
+
+
+* Kolonları eşit aralıklı şekilde hizalamak için 
+
+	<div class="row justify-content-between">
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+		<div class="col -3">sütun</div>
+	</div>
+
+
+
+
+9- Sıralama Sınıfları
+------------------------------------------------
+
+* Diyelim ki satırlarımız içindeki kolonları sıralamak istiyoruz , farklı boyutlarda farklı yerleşimlerde olsunlar ve yerlerini değiştirelim istiyoruz . 
+
+* Bu noktada bize en çok yardımcı olacak yapı sıralama sınıflarıdır.
+
+	<div class="container">	
+		<div class="row">
+			<div class="col"> 1 </div>
+			<div class="col"> 2 </div>
+			<div class="col"> 3 </div>
+			<div class="col"> 4 </div>
+		</div>
+	</div>
+
+* Elimizde 4 sütun var . Bunların sıralarını tersine çevirelim .
+
+	<div class="container">	
+		<div class="row">
+			<div class="col order-4"> 1 </div>
+			<div class="col order-3"> 2 </div>
+			<div class="col order-2"> 3 </div>
+			<div class="col order-1"> 4 </div>
+		</div>
+	</div>
+
+* Farklı genişliklere göre yerlerini değiştirelim .
+
+	<div class="container">	
+		<div class="row">
+              		<div class="col order-4 order-sm-3  order-md-2 order-lg-first order-xl-last">1</div>
+			<div class="col order-3"> 2 </div>
+			<div class="col order-2"> 3 </div>
+			<div class="col order-1"> 4 </div>
+		</div>
+	</div>
+
+* Böylece 1 numaralı sütunumuz normalde 4. , small boyutta 3. , medium boyutta 2. , large boyutta ise 1. , xl boyutta da son sırayı alır  .
+
+
+
+
+10- Offset Sınıfı
+------------------------------------------------
+
+* Diyelim ki birinci satırımızda 2 tane sütun var . Hemen altında da yani ikinci satırımızda tek sütun var .
+
+* İlk satırımızdaki grid düzeni sayfayı ikiye bölmüş olacaktır .
+	
+	Yani col-6 özelliğini taşıyacaktır .
+
+* İkinci satırımız ise sola dayalı şekilde gelir . 
+
+* İkinci satırımızdaki tek sütunu estetik görünüm adına üstteki iki kolonun arasına alalım .
+
+* Eğer ikinci satırımızdaki column özelliği de col-6 ise 
+
+	col-6 offset-3 diyerek 3 adım sağa taşıyıp col-9 özelliğini vermiş oluruz
+
+* Böylece üstteki sütunları ortalamış oluruz .
+
+
+
+
+11- İç İçe Satır-Sütun Kullanımı
+------------------------------------------------
+
+* Oluşturduğumuz satırın içindeki kolona bir satır daha açıp onun içine de 2  sütun daha koyalım
+	
+	<style>
+
+		body{
+			text-align : center;
+		}
+
+		.col {
+			background-color : rgba(86,61,124, .15);
+			border: 1px solid rgba(86,61,124, .2);
+			padding : 1rem;
+		}
+	
+	</style>
+
+
+	<div class="container">	
+		<div class="row">
+              		<div class="col ">1
+
+				<div class="row">
+					<div class="col"> 2.1 </div>
+					<div class="col"> 2.2 </div>				
+				</div>	
+			
+			</div>
+		</div>
+	</div>
+
+
+* Şimdi 2. satırın kolonlarına da 3 er tane yeni kolon ekleyelim
+
+	<div class="container">	
+		<div class="row">
+              		<div class="col ">1	
+				<div class="row">
+					<div class="col"> 2.1 
+
+						<div class="row"> 
+							
+							<div class="col"> 3.1 </div>						
+							<div class="col"> 3.2 </div>						
+							<div class="col"> 3.3 </div>						
+						
+						</div>
+										
+					</div>
+
+					<div class="col"> 2.2 
+			
+						<div class="row"> 
+							
+							<div class="col"> 3.1 </div>						
+							<div class="col"> 3.2 </div>						
+							<div class="col"> 3.3 </div>						
+						
+						</div>
+
+					</div>	
+			
+				</div>	
+			</div>
+		</div>
+	</div>
+
+
+12- Metin Hizalama Yöntemleri
+------------------------------------------------
+
+* Bir metni iki yöne yaslamak için 
+
+	<p class="text-justify" > ... </p> 
+
+sınıfı kullanılır
+
+* Sola yaslamak için justify yerine left yazılır
+
+* Sağa yaslamak için justify yerine right  yazılır
+
+* Ortalamak için ise justify yerine center yazılır
+
+
+
+13- Kenarlık Stilleri
+------------------------------------------------
+
+* Bir elemente kenarlık eklemek için border sınıfı kullanılır.
+
+* Default olarak 1px lik bir kenarlık eklenir.
+
+* Sadece belli bir yönüne kenarlık eklemek istiyorsak border sınıfının yanında yönünü belirtmeliyiz.
+
+* Var olan borderı kaldırmak için border-0 yapmak yeterlidir.
+
+* Renkli kenarlıklar için bootstrabin özel renkleri kullanılır.
+
+* Yuvarlak görünümlü kenarlık eklemek için rounded kalıbı kullanılır.
+
+* Komple yuvarlak bir görünüm için circle eklenir.
+
+
+	<style>
+		span {
+			height : 75px;
+			width : 75px;
+			background-color : whitesmoke;
+			display : inline-block;
+		}
+	
+		span[class*="rounded"]{
+			background-color : orange;
+		}
+	</style>
+
+	
+	<div class="container">
+
+		<span class="border"></span>
+		<span class="border-top"></span>
+		<span class="border-right"></span>
+		<span class="border-bottom"></span>
+		<span class="border-left"></span>
+
+		<span class="border border-primary"></span>
+		<span class="border border-secondary"></span>
+		<span class="border border-success"></span>
+		<span class="border border-danger"></span>
+		<span class="border border-warning"></span>
+		<span class="border border-info"></span>
+		<span class="border border-dark"></span>
+		<span class="border border-light"></span>
+		<span class="border border-white"></span>
+
+		<span class="rounded"></span>
+		<span class="rounded-top"></span>
+		<span class="rounded-right"></span>
+		<span class="rounded-bottom"></span>
+		<span class="rounded-left"></span>
+		<span class="rounded-circle"></span>
+		<span class="rounded-0"></span>
+		
+	</div>
+
+
+14- Margin ve Padding Kullanımı
+------------------------------------------------
+
+* Margin dış boşluğu , Padding ise iç boşluğu temsil etmektedir . 
+
+* Her ikisi için de 0' dan 6' ya kadar toplam 6 öz nitelik mevcuttur . 
+
+* Ayrıca Margin için ek olarak auto modu bulunur .
+
+* Eğer yön belirtilmesse default olarak 4 yönden de boşluk uygulanır . 
+
+* Boşluğun uygulanacağı yönü de belirtebiliriz . 
+
+* t , b , l , r , x  ve y temsili yönlerdir . 
+
+* Örnek olarak 
+
+	mt-5 
+	py-2
+	mx-auto 
+
+verilebilir . 
+
+* Kırılma noktalarını kullanarak da boşluk atayabiliriz .
+
+	m-lg-2 
+	p-md-4      // medium ve daha geniş ölçeklerde p değeri 4 olarak ayarlansın
+	m-xl-auto 
+
+
+15- Display Sınıfları
+------------------------------------------------
+
+*  none              : Görüntülenmemeyi sağlar
+    inline		   : Bir satır içi elementi gibi görüntülenir
+    inline-block   : İnlinedan farkı yükseklik ve genişlik değerleri uygulanabilir
+    block	           : Block elementi gibi görüntülenmesini sağlar . Yenş satırdan başlar
+    table		   : Uygulanılan elementin tr -td etiketi gibi davranmasını sağlar	
+    flex		   : Block seviyesinde bir flex container
+    inline-flex     : Satır içi seviyesinde bir flex container gibi görünmesini sağlar 
+
+* Uygulanışı 
+
+   .d-{özellik}
+   .d-{kırılma noktası}-{özellik}
+   .d-print-{özellik}
+
+* Örnek 
+
+   <div class=" d-print-none"> Bu div yazıcıda görüntülenmez </div>
+
+gibi nitelikler mevcuttur . 
+
+
+16- Görünürlük 
+------------------------------------------------
+
+* Örnek olarak 
+
+	<p class="invisible" > ... </p> 
+
+özelliği ile yazıyı görünmez yapabiliriz.
+
+* display none ' dan farkı sayfa düzeninin bozulmamasıdır .
+
+* Aynı zamanda invisible özellikteki bir alanın içinde visible özelliği taşıyan bir alan da oluşturabiliriz .
+
+	<p class="invisible" > ...
+	....
+	....
+	
+		<span class="visible"> Furkan Yıldız</span>
+	....	
+	....
+	</p> 
+
+
+17-  Arka Plana Renk Katmak 
+------------------------------------------------
+
+*  primary
+    secondary
+    warning
+    danger
+    info 
+    light
+    dark 
+    white
+    success
+
+gibi renk sınıflarımız mevcut . Bu renkleri kullanarak  bg-{renk}  arka planı değiştirebiliriz .
+
+
+<p class="bg-dark"> ... </p> 
+
+	
+
+18-  Metine Renk Vermek 
+------------------------------------------------
+
+* text-{renk sınıfı} diyerek metnimize sınıf içerisinde renk katabiliriz . 
+
+* arka plan rengi ile beraber de kullanabiliriz
+
+
+<p class="bg-dark  text-success"> ... </p> 
+
+
+
+19- Float ve Clearfix Özellikleri
+------------------------------------------------ 
+
+* Genelde elementlerin yan yana yaslanması için kullanılan yapılardır. 
+
+* Alt alta dizili elementlere float-left özelliği atandığında sırayla yan yana dizileceklerdir.
+
+* Aynı zamanda kırılma noktalarına göre de bu yaslanmaları kontrol etmek mümkündür.
+
+* class içerisinde float-sm-left  float-md-right özellikleri verildiğinde small sayfada sola , medium sayfada sağa süzülme görülecektir.
+
+* Bazı durumlarda istenmeyen görünümler çıkabilir .
+
+* Akışın dışındaki durumlarda float uygulanan elementler bir div içerisine alınıp sınıfın içine clearfix özelliği uygulandığında özellikler temizlenmiş olur sayfa olağan akışına döner .
+
+<div class="float-left"> ... </div>
+
+<div class="clearfix"> .... </div>
+
+
+20- Resimler 
+------------------------------------------------
+
+* Resim eklemek için img  tagı kullanılır ve source belirtilir
+
+ 	<img class="img-fluid" src="images/ağaç.src" >
+
+* Fluid özelliği katarak responsive bir yapı sağladık 
+
+* img-thumbnail  sınıfı resmin çerçeveli görüntülenmesini sağlar
+
+* rounded veya rounded-circle ile resmin kenarlıklı görünmesi sağlanabilir 
+
+*  Margin ile de hizalama yapılabilir 
+
+
+
+21- Tablolar
+------------------------------------------------
+
+* Table sınıfı ile tablo özelliği verilir 
+
+* Yanında belirtilecek table-hover , table-success , table-bordered , table-stripped 
+gibi birçok görünüm özelliklerini kullanabiliriz . 
+
+
+
+22- Butonlar
+------------------------------------------------
+
+* Btn sınıfı ile buton özelliği verilir 
+
+* Bunun yanında renkli buton için 
+
+	<button type="button"  class="btn btn-warning" > WARNING </button>
+
+* Linklere buton görünümü de verebiliriz
+
+	<a class="btn btn-primary" href="#" role="buton"> Link </a>
+
+* Üzerine gelindiğinde renk değiştiren estetik bir görünümdeki buton için
+
+	<button type="button" class="btn btn-outline-primary"> Primary </button>
+
+
+23- Formlar
+------------------------------------------------
+
+* Basit bir örnekle nasıl stillendirme yapabileceğimizi görelim 
+
+    <form>
+
+	<div class="form-group">
+		<label for="mail"> Email </label>
+		<input type="email" class="form-control" id="mail"
+		placeholder="Email Adresinizi Giriniz.." required >
+	</div>
+
+	<div class="form-group">
+		<label for="sifre" > Şifre </label>
+		<input type="password" class="form-control" id="sifre"
+		placeholder="Şifrenizi Giriniz.." required >
+		<small class="form-text text-muted">
+			Şifreniz 8-20 karakter uzunluğunda olmalıdır.
+		</small>
+	</div>
+
+	<div class="form-check">
+		<input type="checkbox" class="form-check-input"  id="onay"
+		required>
+		<label for="onay"> Kullanım koşullarını okudum . Kabul ediyorum . 
+		</label>
+	</div>
+
+	<button type="submit" class="btn btn-primary mt-2" >
+		Kaydol
+	</button>
+
+   </form>
+
+
+
+24- Navigasyon 
+------------------------------------------------
+
+* Erişebilirlik açısından faydalı basit bir navigasyon alanı tasarlayalım
+
+ 	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+
+				<li class="breadcrumb-item">
+					<a href="#"> Anasayfa </a>
+				</li>
+
+				<li class="breadcrumb-item">
+					<a href="#"> Personeller </a>
+				</li>
+
+				<li class="breadcrumb-item active">
+					<a href="#"> Departmanlar </a>
+				</li>
+
+			</ol>
+		</nav>
+	</div>
+	
+					
